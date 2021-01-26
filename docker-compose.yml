@@ -1,0 +1,8 @@
+version: "3"
+services:
+  fastapi:
+    image: baristi000/ml-api:latest
+    container_name: ml-api1
+    restart: on_failure
+    ports: 
+      - 8000:8000
