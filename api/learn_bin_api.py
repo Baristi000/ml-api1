@@ -11,7 +11,6 @@ def train_bin(
     name:str   = Body(...),
     percent:float = Body(...)
 ):
-    print(type(percent))
     return learn_01.train_bin(data,label,name, percent)
 
 @router.post('/predict_bin')
