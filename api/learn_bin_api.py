@@ -9,8 +9,9 @@ def train_bin(
     data:list  = Body(...),
     label:list = Body(...),
     name:str   = Body(...),
-    percent:int = Body(...)
+    percent:float = Body(...)
 ):
+    print(type(percent))
     return learn_01.train_bin(data,label,name, percent)
 
 @router.post('/predict_bin')
