@@ -8,8 +8,8 @@ def train_bin(data:list, label:list, name:str, percent: float):
     train_labels = label
     model = tf.keras.Sequential([
         tf.keras.layers.Flatten(input_shape=(2,)),
+        tf.keras.layers.Dense(32, activation='relu'),
         tf.keras.layers.Dense(256, activation='relu'),
-        tf.keras.layers.Dropout(.3),
         tf.keras.layers.Dense(2, activation='softmax')
     ])
     model.compile(optimizer='adam',
