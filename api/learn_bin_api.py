@@ -20,9 +20,17 @@ def predict_bin(
 ):
     return learn_01.predict_bin(data, name)
 
-@router.get('/agents_number')
-def agents_number():
+@router.get('/agents_list')
+def agents_list():
     agent_name = []
     for name,value in setting.var_learn1.items():
         agent_name.append(name)
     return{'agents':agent_name}
+
+@router.post('/delete_agent')
+def delete_agent(name:str = Body(...)):
+    try:
+        del setting.var_learn1[name]
+    except:
+        return{'status':'error'}
+    return{'status':'successed'}
