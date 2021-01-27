@@ -9,9 +9,9 @@ def train_bin(
     data:list  = Body(...),
     label:list = Body(...),
     name:str   = Body(...),
-    epochs:int = Body(...)
+    percent:int = Body(...)
 ):
-    return learn_01.train_bin(data,label,name, epochs)
+    return learn_01.train_bin(data,label,name, percent)
 
 @router.post('/predict_bin')
 def predict_bin(

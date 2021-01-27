@@ -2,7 +2,7 @@ import tensorflow as tf
 from core.config import setting
 import numpy as np
 
-def train_bin(data:list, label:list, name:str, epochs: int):
+def train_bin(data:list, label:list, name:str, percent:float):
     name = name+str(len(setting.var_learn1))
     train_values = data
     train_labels = label
@@ -15,9 +15,18 @@ def train_bin(data:list, label:list, name:str, epochs: int):
     model.compile(optimizer='adam',
               loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
               metrics=['accuracy'])
-    model.fit(train_values, train_labels, epochs=epochs)
+
+    times = 0
+    acc = 0
+    while times < 1000 and acc < percent:
+        times+=1
+        model.fit(train_values, train_labels, epochs=2)
+        loss,acc = model.evaluate(train_values,train_labels,verbose=True)
+
     setting.var_learn1.update({name:model})
-    return {"status":'ok'}
+
+    return {"train_time":times,
+            'percent':percent}
 
 def predict_bin(data:list, name:str):
     r = setting.var_learn1[name].predict(data)
